@@ -8,16 +8,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Create APK using PWA Builder
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install PWA CLI
+        run: npm install -g @pwabuilder/cli
+
+      - name: Build Android APK
         run: |
-          npx pwabuilder build --platform android
-          
+          mkdir -p out
+          npx pwabuilder build --platform android --location out
+
+      - name: List files (debug)
+        run: ls -la out/ || echo "out folder not found"
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Toolbox-APK
-          path: out/android/*.apk
+          path: out/**/*.apk
