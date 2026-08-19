@@ -1,23 +1,23 @@
 name: Build APK
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Create APK using PWA Builder
+
+      - name: Create APK using Bubblewrap
         run: |
-          npx pwabuilder build --platform android
-          
+          npm install -g @bubblewrap/cli
+          bubblewrap init --manifest https://hassaion88-tech.github.io/ToolboxReborn/manifest.json
+          bubblewrap build --output apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Toolbox-APK
-          path: out/android/*.apk
+          path: apk/*.apk
