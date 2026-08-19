@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Toolbox Reborn</title>
     
-    <!-- ====== هذا السطر مهم لتطبيق أندرويد ====== -->
-    <link rel="manifest" href="/ToolboxReborn/manifest.json">
-    <!-- ========================================= -->
+    <!-- ====== manifest داخل الـ HTML نفسه (بدون ملف منفصل) ====== -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlRvb2xib3ggUmVib3JuIiwKICAic2hvcnRfbmFtZSI6ICJUb29sYm94IiwKICAiZGVzY3JpcHRpb24iOiAi0YzRhtC40YAg0YHRgtC10LfQsNGB0YIg0YLQtdC00LLRltC70LAg0YzRj9C00LjQvdC60YDQsNGE0YLQsCIsCiAgInN0YXJ0X3VybCI6ICIvVG9vbGJveFJlYm9ybi9pbmRleC5odG1sIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjBmMWEiLAogICJ0aGVtZV9jb2xvciI6ICIjZjc5NzFlIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9lbW9qaWNkbi5lbGsuc2gv4pajIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImh0dHBzOi8vZW1vamljZG4uZWxrLnNoL+KWoyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    <!-- ========================================================== -->
     
     <style>
-        /* ====== التصميم العصري ====== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
         body {
-            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0f0f1a;
             color: #fff;
             min-height: 100vh;
@@ -29,7 +27,6 @@
             padding: 16px;
             background-image: radial-gradient(circle at 20% 30%, #1a1a3e 0%, #0a0a12 100%);
         }
-        
         .app-container {
             background: rgba(20, 20, 40, 0.85);
             backdrop-filter: blur(20px);
@@ -41,7 +38,6 @@
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.08);
             border: 1px solid rgba(255, 215, 0, 0.06);
         }
-        
         .header {
             display: flex;
             align-items: center;
@@ -50,7 +46,6 @@
             padding-bottom: 16px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.08);
         }
-        
         .app-icon {
             width: 56px;
             height: 56px;
@@ -62,11 +57,9 @@
             font-size: 30px;
             box-shadow: 0 8px 24px rgba(247, 151, 30, 0.3);
         }
-        
         .app-title {
             flex: 1;
         }
-        
         .app-title h1 {
             font-size: 22px;
             font-weight: 700;
@@ -75,13 +68,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
         .app-title .sub {
             font-size: 12px;
             color: #8888aa;
             letter-spacing: 1px;
         }
-        
         .version-badge {
             background: rgba(79, 195, 247, 0.15);
             padding: 4px 14px;
@@ -90,20 +81,13 @@
             color: #4fc3f7;
             border: 1px solid rgba(79, 195, 247, 0.1);
         }
-        
         .card {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
             padding: 18px 16px;
             margin-bottom: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: all 0.2s;
         }
-        
-        .card:active {
-            transform: scale(0.98);
-        }
-        
         .card-label {
             font-size: 11px;
             color: #666688;
@@ -111,17 +95,11 @@
             letter-spacing: 2px;
             margin-bottom: 6px;
         }
-        
         .card-value {
             font-size: 26px;
             font-weight: 700;
             color: #fff;
         }
-        
-        .card-value .highlight {
-            color: #ffd200;
-        }
-        
         .btn {
             display: block;
             width: 100%;
@@ -134,39 +112,20 @@
             transition: all 0.25s;
             margin-bottom: 10px;
             text-align: center;
-            letter-spacing: 0.3px;
         }
-        
         .btn:active {
             transform: scale(0.96);
         }
-        
         .btn-primary {
             background: linear-gradient(90deg, #f7971e, #ffd200);
             color: #0f0f1a;
             box-shadow: 0 8px 28px rgba(247, 151, 30, 0.25);
         }
-        
-        .btn-primary:active {
-            box-shadow: 0 4px 14px rgba(247, 151, 30, 0.15);
-        }
-        
         .btn-secondary {
             background: rgba(255, 255, 255, 0.06);
             color: #ccccee;
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        
-        .btn-secondary:active {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-success {
-            background: linear-gradient(90deg, #43a047, #66bb6a);
-            color: #fff;
-            box-shadow: 0 8px 28px rgba(76, 175, 80, 0.2);
-        }
-        
         .status-box {
             background: rgba(0, 0, 0, 0.4);
             border-radius: 16px;
@@ -182,17 +141,14 @@
             text-align: center;
             line-height: 1.6;
         }
-        
         .status-box.success {
             border-color: rgba(76, 175, 80, 0.2);
             color: #81c784;
         }
-        
         .status-box.loading {
             border-color: rgba(255, 215, 0, 0.15);
             color: #ffd54f;
         }
-        
         .status-box .loader {
             display: inline-block;
             width: 18px;
@@ -204,20 +160,15 @@
             margin-right: 10px;
             vertical-align: middle;
         }
-        
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
-        
         .mods-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
             margin-top: 10px;
         }
-        
         .mod-item {
             background: rgba(255, 255, 255, 0.03);
             padding: 12px 10px;
@@ -226,13 +177,11 @@
             text-align: center;
             font-size: 13px;
         }
-        
         .mod-item .mod-name {
             display: block;
             font-weight: 500;
             color: #ddd;
         }
-        
         .mod-item .mod-ver {
             font-size: 11px;
             color: #4fc3f7;
@@ -242,7 +191,6 @@
             display: inline-block;
             margin-top: 4px;
         }
-        
         .footer {
             margin-top: 18px;
             text-align: center;
@@ -251,45 +199,25 @@
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             padding-top: 14px;
         }
-        
         .footer span {
             color: #ffd200;
         }
-        
-        @media (max-width: 400px) {
-            .app-container {
-                padding: 18px 14px;
-            }
-            .app-title h1 {
-                font-size: 18px;
-            }
-            .card-value {
-                font-size: 22px;
-            }
-            .mods-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
         @keyframes pulse {
-            0%,
-            100% {
-                box-shadow: 0 8px 28px rgba(247, 151, 30, 0.25);
-            }
-            50% {
-                box-shadow: 0 8px 40px rgba(247, 151, 30, 0.45);
-            }
+            0%, 100% { box-shadow: 0 8px 28px rgba(247, 151, 30, 0.25); }
+            50% { box-shadow: 0 8px 40px rgba(247, 151, 30, 0.45); }
         }
         .btn-primary {
             animation: pulse 2.5s infinite;
         }
+        @media (max-width: 400px) {
+            .app-container { padding: 18px 14px; }
+            .app-title h1 { font-size: 18px; }
+            .card-value { font-size: 22px; }
+        }
     </style>
 </head>
 <body>
-
     <div class="app-container">
-
-        <!-- ====== HEADER ====== -->
         <div class="header">
             <div class="app-icon">⛏️</div>
             <div class="app-title">
@@ -299,68 +227,34 @@
             <div class="version-badge" id="versionBadge">v1.0.0</div>
         </div>
 
-        <!-- ====== الإصدار الحالي ====== -->
         <div class="card">
             <div class="card-label">📦 الإصدار الحالي</div>
             <div class="card-value" id="currentVersionDisplay">1.0.0</div>
         </div>
 
-        <!-- ====== الأزرار ====== -->
-        <button class="btn btn-primary" onclick="checkUpdate()">
-            🔄 التحقق من تحديث
-        </button>
+        <button class="btn btn-primary" onclick="checkUpdate()">🔄 التحقق من تحديث</button>
+        <button class="btn btn-secondary" onclick="downloadMods()">📥 تحميل التعديلات</button>
 
-        <button class="btn btn-secondary" onclick="downloadMods()">
-            📥 تحميل التعديلات
-        </button>
+        <div class="status-box" id="status">👋 مرحباً! اضغط للتحقق</div>
 
-        <!-- ====== حالة التطبيق ====== -->
-        <div class="status-box" id="status">
-            👋 مرحباً! اضغط للتحقق
-        </div>
-
-        <!-- ====== قائمة التعديلات ====== -->
         <div style="margin-top:16px;">
-            <div style="font-size:12px; color:#666688; text-align:center; margin-bottom:8px; letter-spacing:1px;">
-                📋 التعديلات المتوفرة
-            </div>
+            <div style="font-size:12px; color:#666688; text-align:center; margin-bottom:8px; letter-spacing:1px;">📋 التعديلات المتوفرة</div>
             <div class="mods-grid" id="modsGrid">
-                <div class="mod-item">
-                    <span class="mod-name">🔧 Toolbox Core</span>
-                    <span class="mod-ver">v2.1.0</span>
-                </div>
-                <div class="mod-item">
-                    <span class="mod-name">⚡ Performance</span>
-                    <span class="mod-ver">v1.4.2</span>
-                </div>
-                <div class="mod-item">
-                    <span class="mod-name">🎨 Texture HD</span>
-                    <span class="mod-ver">v3.0.1</span>
-                </div>
-                <div class="mod-item">
-                    <span class="mod-name">🛡️ Shield Plus</span>
-                    <span class="mod-ver">v1.1.0</span>
-                </div>
+                <div class="mod-item"><span class="mod-name">🔧 Toolbox Core</span><span class="mod-ver">v2.1.0</span></div>
+                <div class="mod-item"><span class="mod-name">⚡ Performance</span><span class="mod-ver">v1.4.2</span></div>
+                <div class="mod-item"><span class="mod-name">🎨 Texture HD</span><span class="mod-ver">v3.0.1</span></div>
+                <div class="mod-item"><span class="mod-name">🛡️ Shield Plus</span><span class="mod-ver">v1.1.0</span></div>
             </div>
         </div>
 
-        <!-- ====== الفوتر ====== -->
-        <div class="footer">
-            يدعم <span>ماينكرافت 1.20 – 1.21.4</span> &bull; تحديث تلقائي
-        </div>
-
+        <div class="footer">يدعم <span>ماينكرافت 1.20 – 1.21.4</span> &bull; تحديث تلقائي</div>
     </div>
 
     <script>
-        // ===================================================
-        //  بيانات التطبيق
-        // ===================================================
         const APP = {
             currentVersion: "1.0.0",
-            latestVersion: "1.3.0",
-            downloadUrl: "https://github.com/hassaion88-tech/ToolboxReborn/releases/latest"
+            latestVersion: "1.3.0"
         };
-
         const MODS_LIST = [
             { name: "🔧 Toolbox Core", version: "2.1.0" },
             { name: "⚡ Performance Booster", version: "1.4.2" },
@@ -370,32 +264,17 @@
             { name: "🌿 Nature Pack", version: "1.2.0" }
         ];
 
-        // ===================================================
-        //  الوظائف
-        // ===================================================
-
         function checkUpdate() {
             const status = document.getElementById('status');
             status.className = 'status-box loading';
             status.innerHTML = '<span class="loader"></span> جاري التحقق...';
-
             setTimeout(() => {
                 if (APP.currentVersion !== APP.latestVersion) {
                     status.className = 'status-box success';
                     status.innerHTML = `
                         ✅ <strong>تحديث جديد!</strong><br>
                         الإصدار ${APP.latestVersion} متاح<br>
-                        <button onclick="installUpdate()" style="
-                            margin-top:10px;
-                            background:#ffd200;
-                            color:#0f0f1a;
-                            border:none;
-                            padding:8px 28px;
-                            border-radius:14px;
-                            font-weight:600;
-                            cursor:pointer;
-                            font-size:14px;
-                        ">⬇️ تثبيت التحديث</button>
+                        <button onclick="installUpdate()" style="margin-top:10px; background:#ffd200; color:#0f0f1a; border:none; padding:8px 28px; border-radius:14px; font-weight:600; cursor:pointer; font-size:14px;">⬇️ تثبيت التحديث</button>
                     `;
                     document.getElementById('currentVersionDisplay').textContent = APP.latestVersion;
                     document.getElementById('versionBadge').textContent = 'v' + APP.latestVersion;
@@ -410,25 +289,12 @@
             const status = document.getElementById('status');
             status.className = 'status-box loading';
             status.innerHTML = '<span class="loader"></span> جاري تحميل التحديث...';
-
             setTimeout(() => {
                 status.className = 'status-box success';
                 status.innerHTML = `
                     ✅ تم تحميل التحديث!<br>
-                    <span style="font-size:12px; color:#8888aa;">
-                        سيتم التثبيت عند إعادة التشغيل
-                    </span><br>
-                    <button onclick="restartApp()" style="
-                        margin-top:10px;
-                        background:#43a047;
-                        color:#fff;
-                        border:none;
-                        padding:8px 28px;
-                        border-radius:14px;
-                        font-weight:600;
-                        cursor:pointer;
-                        font-size:14px;
-                    ">🔄 إعادة تشغيل</button>
+                    <span style="font-size:12px; color:#8888aa;">سيتم التثبيت عند إعادة التشغيل</span><br>
+                    <button onclick="restartApp()" style="margin-top:10px; background:#43a047; color:#fff; border:none; padding:8px 28px; border-radius:14px; font-weight:600; cursor:pointer; font-size:14px;">🔄 إعادة تشغيل</button>
                 `;
             }, 2000);
         }
@@ -443,20 +309,13 @@
             const status = document.getElementById('status');
             status.className = 'status-box loading';
             status.innerHTML = '<span class="loader"></span> جاري تحميل التعديلات...';
-
             setTimeout(() => {
                 let grid = document.getElementById('modsGrid');
                 let html = '';
                 MODS_LIST.forEach(mod => {
-                    html += `
-                        <div class="mod-item">
-                            <span class="mod-name">${mod.name}</span>
-                            <span class="mod-ver">${mod.version}</span>
-                        </div>
-                    `;
+                    html += `<div class="mod-item"><span class="mod-name">${mod.name}</span><span class="mod-ver">${mod.version}</span></div>`;
                 });
                 grid.innerHTML = html;
-
                 status.className = 'status-box success';
                 status.innerHTML = `✅ تم تحميل ${MODS_LIST.length} تعديل بنجاح!`;
             }, 1800);
@@ -464,15 +323,7 @@
 
         window.onload = function() {
             document.getElementById('status').innerHTML = '👋 مرحباً! اضغط على "التحقق من تحديث"';
-            setTimeout(() => {
-                const status = document.getElementById('status');
-                if (status.innerHTML.includes('مرحباً')) {
-                    status.innerHTML = '💡 يوجد تحديث جديد! اضغط على الزر أعلاه.';
-                    status.style.borderColor = 'rgba(255,215,0,0.2)';
-                }
-            }, 4000);
         };
     </script>
-
 </body>
 </html>
