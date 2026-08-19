@@ -1,0 +1,25 @@
+```json
+{
+  "name": "Toolbox Reborn",
+  "short_name": "Toolbox",
+  "description": "مدير تعديلات ماينكرافت - تطبيق أندرويد",
+  "start_url": "/ToolboxReborn/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f1a",
+  "theme_color": "#f7971e",
+  "icons": [
+    {
+      "src": "https://emojicdn.elk.sh/⛏️",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://emojicdn.elk.sh/⛏️",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+```
+
