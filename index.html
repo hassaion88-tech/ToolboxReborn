@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Toolbox Reborn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .logo {
+            font-size: 70px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 32px;
+            background: linear-gradient(90deg, #f7971e, #ffd200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .version-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .version-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .version-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4fc3f7;
+            margin-top: 5px;
+        }
+        .btn {
+            background: linear-gradient(90deg, #f7971e, #ffd200);
+            color: #1a1a2e;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(247, 151, 30, 0.3);
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            box-shadow: none;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.3);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .status.success {
+            border-color: #4caf50;
+            color: #81c784;
+        }
+        .status.error {
+            border-color: #f44336;
+            color: #ef9a9a;
+        }
+        .status.loading {
+            border-color: #ff9800;
+            color: #ffb74d;
+        }
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: #ffd200;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .mods-list {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .mod-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .mod-name {
+            font-size: 14px;
+        }
+        .mod-version {
+            font-size: 12px;
+            color: #4fc3f7;
+            background: rgba(79, 195, 247, 0.15);
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #555;
+        }
+        .footer a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+        .update-btn-small {
+            margin-top: 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .update-btn-small:hover {
+            background: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">⛏️</div>
+        <h1>Toolbox Reborn</h1>
+        <p class="subtitle">مدير تعديلات ماينكرافت</p>
+
+        <div class="version-box">
+            <div class="version-label">📦 الإصدار الحالي</div>
+            <div class="version-number" id="currentVersion">1.0.0</div>
+        </div>
+
+        <button class="btn" onclick="checkUpdate()">🔄 التحقق من تحديث جديد</button>
+        <button class="btn btn-secondary" onclick="downloadMods()">📥 تحميل أحدث التعديلات</button>
+
+        <div class="status" id="status">
+            👋 مرحباً! اضغط على زر التحقق
+        </div>
+
+        <div class="mods-list" id="modsList">
+            <div style="color:#666; font-size:13px; text-align:center; margin-bottom:10px;">📋 التعديلات المتوفرة</div>
+            <div class="mod-item">
+                <span class="mod-name">🔧 Toolbox Core</span>
+                <span class="mod-version">v2.1.0</span>
+            </div>
+            <div class="mod-item">
+                <span class="mod-name">⚡ Performance Booster</span>
+                <span class="mod-version">v1.4.2</span>
+            </div>
+            <div class="mod-item">
+                <span class="mod-name">🎨 Texture Pack HD</span>
+                <span class="mod-version">v3.0.1</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            يدعم ماينكرافت 1.20 - 1.21.4 | <a href="#" onclick="checkUpdate()">تحديث التطبيق</a>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // بيانات التطبيق (محاكاة GitHub API)
+        // ============================================
+        const VERSIONS = {
+            current: "1.0.0",
+            latest: "1.2.0",
+            downloadUrl: "https://github.com/your-username/ToolboxReborn/releases/latest"
+        };
+
+        const MODS = [
+            { name: "🔧 Toolbox Core", version: "2.1.0", supported: "1.21" },
+            { name: "⚡ Performance Booster", version: "1.4.2", supported: "1.20-1.21" },
+            { name: "🎨 Texture Pack HD", version: "3.0.1", supported: "1.21.4" },
+            { name: "🛡️ Shield Plus", version: "1.1.0", supported: "1.20" },
+        ];
+
+        // ============================================
+        // الوظائف الرئيسية
+        // ============================================
+
+        function checkUpdate() {
+            const status = document.getElementById('status');
+            status.className = 'status loading';
+            status.innerHTML = 'جاري التحقق من التحديثات... <span class="loader"></span>';
+
+            setTimeout(() => {
+                const current = VERSIONS.current;
+                const latest = VERSIONS.latest;
+
+                if (current !== latest) {
+                    status.className = 'status success';
+                    status.innerHTML = `
+                        ✅ <strong>تحديث جديد متوفر!</strong><br>
+                        الإصدار ${latest} متاح الآن<br>
+                        <button class="update-btn-small" onclick="installUpdate()">
+                            ⬇️ تثبيت التحديث الآن
+                        </button>
+                    `;
+                    document.getElementById('currentVersion').textContent = latest;
+                } else {
+                    status.className = 'status';
+                    status.innerHTML = '✅ أنت تستخدم أحدث إصدار!';
+                }
+            }, 1500);
+        }
+
+        function installUpdate() {
+            const status = document.getElementById('status');
+            status.className = 'status loading';
+            status.innerHTML = '⏳ جاري تحميل التحديث... <span class="loader"></span>';
+
+            setTimeout(() => {
+                status.className = 'status success';
+                status.innerHTML = `
+                    ✅ تم تحميل التحديث بنجاح!<br>
+                    <span style="font-size:13px; color:#aaa;">
+                        (في التطبيق الحقيقي، سيتم تثبيت APK الآن)
+                    </span><br>
+                    <button class="update-btn-small" onclick="restartApp()" style="background:#ffd200; color:#1a1a2e;">
+                        🔄 إعادة تشغيل التطبيق
+                    </button>
+                `;
+            }, 2000);
+        }
+
+        function restartApp() {
+            document.getElementById('status').className = 'status';
+            document.getElementById('status').innerHTML = '🔄 إعادة تشغيل... تم!';
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        }
+
+        function downloadMods() {
+            const status = document.getElementById('status');
+            status.className = 'status loading';
+            status.innerHTML = '📥 جاري تحميل أحدث التعديلات... <span class="loader"></span>';
+
+            setTimeout(() => {
+                let modsHtml = '<div style="color:#666; font-size:13px; text-align:center; margin-bottom:10px;">📋 التعديلات المتوفرة</div>';
+                MODS.forEach(mod => {
+                    modsHtml += `
+                        <div class="mod-item">
+                            <span class="mod-name">${mod.name}</span>
+                            <span class="mod-version">${mod.version}</span>
+                        </div>
+                    `;
+                });
+
+                status.className = 'status success';
+                status.innerHTML = `
+                    ✅ تم تحميل ${MODS.length} تعديل بنجاح!<br>
+                    <div style="margin-top:10px; font-size:12px; color:#aaa;">
+                        متوافقة مع ماينكرافت الإصدارات الحديثة
+                    </div>
+                `;
+
+                document.getElementById('modsList').innerHTML = modsHtml;
+            }, 2000);
+        }
+
+        // ============================================
+        // تشغيل تلقائي عند فتح التطبيق
+        // ============================================
+
+        window.onload = function() {
+            const status = document.getElementById('status');
+            status.innerHTML = '👋 مرحباً! اضغط على "التحقق من تحديث جديد"';
+        };
+    </script>
+</body>
+          </html>
